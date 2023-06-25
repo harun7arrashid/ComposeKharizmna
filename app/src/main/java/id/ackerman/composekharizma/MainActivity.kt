@@ -7,9 +7,8 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
-import androidx.compose.material.Text
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -24,25 +23,33 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
 
-            // gda vertical dan horizontal, jd Box ini kek menimpa satu sama lain
-            Box(
-                modifier = Modifier
-                    .fillMaxWidth(1f)
-                    .fillMaxHeight(0.5f) // setengah dari layar
-                    .background(color = Color.Red)
-                    .padding(16.dp)
-            ) {
+            Column() {
+                
+                CustomButton(text = "Button Pertama", Color.Red)
+                CustomButton(text = "Button Kedua", Color.Green)
 
-                Box(
-                    modifier = Modifier
-                        .size(200.dp)
-                        .background(color = Color.Yellow)
-                        .padding(16.dp)
-                        .border(2.dp, color = Color.Black)
-                        .padding(16.dp)
-                        .border(width = 2.dp, color = Color.Blue)
-                )
             }
+            
         }
     }
+}
+
+@Composable
+fun CustomButton(text: String, color: Color) {
+    
+    Button(
+        onClick = {  },
+        modifier = Modifier
+            .padding(16.dp)
+            .clip(RoundedCornerShape(18.dp)),
+        colors = ButtonDefaults.buttonColors(backgroundColor = color)
+    ) {
+
+        Text(
+            text = text,
+            color = Color.Black
+        )
+
+    }
+    
 }
