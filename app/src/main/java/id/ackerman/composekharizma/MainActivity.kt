@@ -5,7 +5,11 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.itemsIndexed
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -13,6 +17,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
@@ -163,6 +168,56 @@ fun HitungLuas() {
                     fontSize = 22.sp,
                     color = Color.Black
                 )
+            )
+        }
+    }
+}
+
+@Composable
+private fun SetupRecyclerView() {
+
+    LazyColumn() {
+        itemsIndexed(listOf("Budi", "Fajar", "Teguh", "Didin")) { index, data ->
+
+            Text(
+                text = "list  $data",
+                fontSize = 18.sp,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(16.dp)
+
+            )
+
+        }
+        items(count = 300) {
+            Text(
+                text = "list $it",
+                fontSize = 18.sp,
+                textAlign = TextAlign.Center,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(16.dp)
+
+            )
+        }
+    }
+
+    val scrollState = rememberScrollState()
+
+    Column(
+        modifier = Modifier.verticalScroll(scrollState)
+    ) {
+
+        for (i in 1..50) {
+
+            Text(
+                text = "list $i",
+                fontSize = 18.sp,
+                textAlign = TextAlign.Center,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(16.dp)
+
             )
         }
     }
