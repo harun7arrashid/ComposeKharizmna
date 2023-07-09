@@ -17,6 +17,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -25,9 +28,21 @@ class MainActivity : ComponentActivity() {
     @SuppressLint("UnrememberedMutableState")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        val ubuntu = FontFamily(
+                Font(R.font.ubuntu_regular, FontWeight.Normal),
+                Font(R.font.ubuntu_medium, FontWeight.Medium)
+            )
+
         setContent {
-
-
+            Column(Modifier.padding(16.dp)) {
+                Text(
+                    text = "Custom Text",
+                    fontSize = 28.sp,
+                    fontFamily = ubuntu,
+                    fontWeight = FontWeight.Thin // fontWeight ini ada batasannya tergantung dari fontFamily yg kita gunakan
+                )
+            }
         }
     }
 }
