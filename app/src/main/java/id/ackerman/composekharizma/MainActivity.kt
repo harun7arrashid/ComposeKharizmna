@@ -4,22 +4,17 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
-import id.ackerman.composekharizma.ui.theme.ComposeKharizmaTheme
+import androidx.compose.ui.unit.sp
 
 class MainActivity : ComponentActivity() {
     @SuppressLint("UnrememberedMutableState")
@@ -27,7 +22,6 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
 
-            ScaffoldExample()
 
         }
     }
@@ -109,4 +103,68 @@ fun ScaffoldExample() {
         content = { Text(text = "Ini Konten") }
 
     )
+}
+
+@Composable
+fun HitungLuas() {
+
+    var panjangState by remember { mutableStateOf("") }
+
+    var lebarState by remember { mutableStateOf("") }
+
+    var hasilState by remember { mutableStateOf(0) }
+
+    Scaffold(
+        modifier = Modifier.fillMaxSize(),
+        topBar   = {
+
+            TopAppBar(title = { Text(text = "Persegi Panjang") })
+
+        }
+    ) {
+
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally,
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(16.dp) // margin
+        ) {
+
+            TextField(
+                value = panjangState,
+                label = { Text("Panjang") },
+                onValueChange = { panjangState = it },
+                modifier = Modifier.fillMaxWidth()
+            )
+
+            TextField(
+                value = lebarState,
+                label = { Text("Lebar") },
+                onValueChange = { lebarState = it },
+                modifier = Modifier.fillMaxWidth()
+            )
+
+            Spacer(modifier = Modifier.padding(16.dp))
+
+            Button(
+                onClick = {
+                    hasilState = panjangState.toInt() * lebarState.toInt()
+                },
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                Text(text = "Hitung")
+            }
+
+            Spacer(modifier = Modifier.padding(16.dp))
+
+            Text(
+                text = hasilState.toString(),
+                style = TextStyle(
+                    fontSize = 22.sp,
+                    color = Color.Black
+                )
+            )
+        }
+    }
+
 }
